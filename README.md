@@ -7,8 +7,8 @@ This repository holds the simulation source code described in the paper [eLife 2
 Simply use `mpicc` and `mpirun`:
 
 ```bash
-    $ mpicc -o microtubule.out microtubule.c -lm -O3
-    $ mpirun -n 4 ./microtubule.out
+$ mpicc -o microtubule.out microtubule.c -lm -O3
+$ mpirun -n 4 ./microtubule.out
 ```
 
 ## Description
