@@ -35,10 +35,11 @@ All parameters of MT (including the curvature of tubulin, the distribution of GT
 * `Lat_Length` :    How many tubulins on the lateral direction, works only when `Whole_Struc = 0`
 * `InitFila` :      How many tubulins on the lateral direction, works only when `Whole_Struc = 1`
 
-### Potential
+### Potential Function
 
-The length unit in this code is 2nm, which means that the \\(r_0 = 4\\)nm in the paper is equivalent to \\(r_0 = 2\\) here.
-Similarly, the energy unit is \\(\epsilon_0\\)
+The length unit in this code is 2nm, which means that the $r_0$ = 4nm in the paper is equivalent to $r_0$ = 2 here.
+Similarly, the energy unit is $\epsilon_0$, same as that in the paper.
+
 * `P_LJC` :         Parameter for longitudinal stretching stiffness, $a_long$
 * `P_LJS` :         Parameter for lateral stretching stiffness, $a_lat$
 * `KLong` :         Parameter for longitudinal bending stiffness, $b_long$
@@ -46,55 +47,31 @@ Similarly, the energy unit is \\(\epsilon_0\\)
 * `TLong` :         Parameter for longitudinal twisting stiffness, $c_long$
 * `GLat` :          Parameter for lateral twisting stiffness, $c_long$
 
+### Dynamics
 
->BoxOut		0x00	//High: 1:PatchyPoint 2:nst Low: 1:fp Box 2:vmd Box 4:fp connect 8:vmd connect
->ELong			1.0
->P_LJC			10
->P_LJS			10//P_LJC
->KLat			4
->KLong			8
->TLong			2e1//(30.0*TLat)
->GLat			2e0
->DeltaL			0e-2	//UniformForce: Strain Other: Distance
->DeltaA			0e-3
->BCType			0x10	//High:-end Low:+end 0:Free 1:Hinged 2:Slide 4:Fix
->ForceXYZ		0x00	//Low: Direction:xyz(124) Rotate(8) High: 0:None 1:Uniform 2:+end 4:-end 8:ShearEdge
-;>RFUnits		0//(RFLayers*InitFila)//25
->FixLink		1
->cutoff_s		2.7
->Max_Add_Link	12
->QDType			0x05	//High: chain Low: side 1:distribution 2: uniform 4: uni-axis 8: uni-Layer
->TipType		2		//0:Sin 1:Mix 2:Power 3:Power Shift 4:Double Peak 5:Linear Mix 6:Decay
->PhaseFile		0		//0:Given by paras 1:Given by File 'PhaseData'	2:Given by File 'PhaseData07'
->GROW_ON		3
->MustGrow		1
->BREAK_ON	0
->HD_ON		1
->G_rate		9.0
->EBase		0.71
->GSteps		5000
->G_Slow		500
->HD_Delay	100000
->C_rate		1e-12
->HD_rate		2e-7
->S_rate		1e7
->B_rate		5e-3
+A layer of virtual tubulins is added on the MT at each growth step, the growth probability of each virtual tubulin is determined by its energy. At most, one virtual tubulin is chosen to grow.
 
-!Loop
->XI_0		5.0
->RFLayers	0
->RFUnits	24
->QDDelta	0.0
->TipSinA	0
->TipSinL	3
->TipSinH		1
->TipSinPhase	0.0
->TipARatio		0.0
-;ELatAA			2.0
-;ELatBA			1.64
->Tst				0
->Ted				100
->DeltaT			10
->DeltaXi			0
+* `GROW_ON` :       Let the MT grow or not, 3 for grow, 0 for not grow
+* `HD_ON` :         Let tubulin hydrolyze or not
+* `BREAK_ON` :      Let filament break or not
+* `GSteps` :        Growth rate, grow one tubulin every `GSteps` steps
+* `G_rate` :        Parameter for calculate the growth probability of each filament
+* `EBase` :         Parameter for calculate the growth probability of each filament
+* `MustGrow` :      Force to grow one tubulin at each growth step
+* `HD_rate` :       Hydrolyzation constant
+* `C_rate` :        Parameter for calculate the breaking probability of each filament
+
+### Distribution of GTP-tubulins
+
+* `RFLayers` :      How many layers of tubulin are reinforced
+* `RFUnits` :       How many GTP-tubulin are reinforced (They will not hydrolyze); This value should be smaller than `InitFila * RFLayers`
+* `QDType` :        Type of quenched disorder. 8-bit value, the higher 4-bit for longitudinal springs and lower 4-bit for lateral ones. 1 means distributing in this direction (see Eq. 14 in the paper), 2 means uniform distribution, 4 means same value for each filament, 8 means same value for each layer
+* `QDDelta` :       1/k
+
+### Other Parameters
+
+* Parameters for the shape of MT tip: `TipType` `TipSinA` `TipSinL` `TipSinH` `TipSinPhase` `TipARatio`
+* Parameters for the mechanical tests: `BCType` `ForceXYZ` `DeltaL` `DeltaA` `DeltaT` `DeltaXi` `Tst` `Ted`
+
 
 
