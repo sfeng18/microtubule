@@ -37,8 +37,8 @@ All parameters of MT (including the curvature of tubulin, the distribution of GT
 
 ### Potential
 
-The length unit in this code is 2nm, which means that the $r_0 = 4$ in the paper is equivalent to $r_0 = 2$ here.
-Similarly, the energy unit is $\epsilon_0$
+The length unit in this code is 2nm, which means that the \\(r_0 = 4\\)nm in the paper is equivalent to \\(r_0 = 2\\) here.
+Similarly, the energy unit is \\(\epsilon_0\\)
 * `P_LJC` :         Parameter for longitudinal stretching stiffness, $a_long$
 * `P_LJS` :         Parameter for lateral stretching stiffness, $a_lat$
 * `KLong` :         Parameter for longitudinal bending stiffness, $b_long$
