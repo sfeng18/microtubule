@@ -35,11 +35,19 @@ All parameters of MT (including the curvature of tubulin, the distribution of GT
 * `Lat_Length` :    How many tubulins on the lateral direction, works only when `Whole_Struc = 0`
 * `InitFila` :      How many tubulins on the lateral direction, works only when `Whole_Struc = 1`
 
+### Potential
+
+The length unit in this code is 2nm, which means that the $r_0 = 4$ in the paper is equivalent to $r_0 = 2$ here.
+Similarly, the energy unit is $\epsilon_0$
+* `P_LJC` :         Parameter for longitudinal stretching stiffness, $a_long$
+* `P_LJS` :         Parameter for lateral stretching stiffness, $a_lat$
+* `KLong` :         Parameter for longitudinal bending stiffness, $b_long$
+* `KLat` :          Parameter for lateral bending stiffness, $b_long$
+* `TLong` :         Parameter for longitudinal twisting stiffness, $c_long$
+* `GLat` :          Parameter for lateral twisting stiffness, $c_long$
+
 
 >BoxOut		0x00	//High: 1:PatchyPoint 2:nst Low: 1:fp Box 2:vmd Box 4:fp connect 8:vmd connect
->NCellX			80
->NCellY			40
->NCellZ			40
 >ELong			1.0
 >P_LJC			10
 >P_LJS			10//P_LJC
@@ -73,7 +81,6 @@ All parameters of MT (including the curvature of tubulin, the distribution of GT
 >B_rate		5e-3
 
 !Loop
->InitFila	13
 >XI_0		5.0
 >RFLayers	0
 >RFUnits	24
